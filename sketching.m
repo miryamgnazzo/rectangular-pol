@@ -7,8 +7,7 @@ n = s/(k+1);
 
 % Construct Sketching Matrix
 %rng(5)
-G = randn(2*n, m);
+%G = randn(4*n, m);
+ G = randn(2*n, m);
 
 S = G*A;
-
-

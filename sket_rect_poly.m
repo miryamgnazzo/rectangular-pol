@@ -1,4 +1,4 @@
-function [XX, LL, R] = sket_rect_poly(A, k)
+function [XX, LL, R, X_t, L_t] = sket_rect_poly(A, k)
 % A =[A_k, A_(k-1), ... , A_0] is a matrix containing the coefficient of the matrix polynomial
 % k is the degree of the matrix polynomial
 % Using FIRST COMPANION LINEARIZATION and ITO MUROTA
@@ -15,7 +15,8 @@ S = sketching(A, k);
 [C0,C1] = first_companion(S,k);
 
 %Use ITO_MUROTA on the companion form
-[X , L] = eig_ItoMurota(C0, -C1);
+% [X , L] = eig_ItoMurota(C0, -C1);
+[X , L] = eig_ItoMurota_rob(C0, -C1);
 
 %check the residuals on the original matrix polynomial A
 X_t = X( end - n +1: end, :);
@@ -35,7 +36,7 @@ for i = 1: length(L_t)
 
     Norm_Res = norm(Res);
 
-    if (Norm_Res <= 2*1e-14)
+    if (Norm_Res <= 1e-14)
         R = [R; Norm_Res];
         XX = [XX X_t(:,i)];
         LL(end + 1, end + 1) = L_t(i);

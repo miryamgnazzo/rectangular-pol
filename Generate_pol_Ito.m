@@ -23,5 +23,3 @@ A2 = Q*A_2;
 A = [A2, A1, A0];
 
 [C0 , C1] = first_companion(A, k);
-
-
